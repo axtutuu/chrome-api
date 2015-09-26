@@ -1,4 +1,8 @@
 class ChatsController < ApplicationController
+  def index
+    @chats = Chat.where(room_id: params[:room_id]).limit(10).order("created_at DESC")
+  end
+
   def create
     chat = Chat.new(chat_params)
     unless chat.save
