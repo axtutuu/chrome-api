@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   def index
-    @chats = Chat.where(room_id: params[:room_id]).limit(10).order("created_at DESC")
+    count = Chat.where(room_id: params[:room_id]).count - 10
+    @chats = Chat.where(room_id: params[:room_id]).offset(count)
   end
 
   def create
